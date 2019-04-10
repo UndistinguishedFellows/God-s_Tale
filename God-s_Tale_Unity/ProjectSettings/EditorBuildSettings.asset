@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/_GodsTale/Scenes/Main.unity
     guid: 5c3569b82786c99479792a2628fba560
   m_configObjects: {}
