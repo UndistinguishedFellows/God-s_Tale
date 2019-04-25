@@ -8,10 +8,12 @@ public enum MapCreationType
     WorldSize = 1
 }
 
+[CreateAssetMenu(fileName = "MapData", menuName = "God's_Tale/Map/MapData")]
 public class MapData : ScriptableObject
 {
     public int GridWidth { get; private set; }
     public int GridHeight { get; private set; }
+    public int GridCount { get { return GridWidth * GridHeight; } }
     public int WorldWidth { get; private set; }
     public int WorldHeight { get; private set; }
     public float TileWidth { get { return m_tileWidth; } }
@@ -19,19 +21,23 @@ public class MapData : ScriptableObject
     public float TileOffset { get { return m_tileOffset; } }
     public TileMap TileMap { get { return m_tileMap; } }
     
-    private int m_gridWidth = 0, m_gridtHeight = 0;         // TODO: Create custom inspector to serialize only one set of properties according to map creation type
+    [SerializeField] private int m_gridWidth = 0, m_gridtHeight = 0;         // TODO: Create custom inspector to serialize only one set of properties according to map creation type
     private float m_worldWidth = 0.0f, m_worldHeight = 0.0f;      // TODO: Create custom inspector to serialize only one set of properties according to map creation type
     [SerializeField] private float m_tileWidth = 0.0f, m_tileHeight = 0.0f;
     [SerializeField] private float m_tileOffset = 0.0f;
     [SerializeField] private TileMap m_tileMap = null;
     [SerializeField] private MapCreationType m_mapCreationType = MapCreationType.GridSize;
 
-    private void CalcMapSize()
+    
+    public void CalcMapSize()
     {
         if(m_mapCreationType == MapCreationType.GridSize)
         {
             m_worldWidth = (m_gridWidth * m_tileWidth) + (m_tileOffset * m_gridWidth);
             m_worldHeight = (m_gridtHeight * m_tileHeight) + (m_tileOffset * m_gridtHeight);
+
+            GridWidth = m_gridWidth;
+            GridHeight = m_gridtHeight;
         }
         else if(m_mapCreationType == MapCreationType.WorldSize)
         {

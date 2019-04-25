@@ -6,7 +6,8 @@ using UnityAtoms;
 [CreateAssetMenu(fileName = "TileData", menuName = "God's_Tale/Map/TileData")]
 public class TileData : ScriptableObject
 {
-    public string ID { get { return m_tileIdentifier.Value; } }
+    public StringConstant ID { get { return m_tileIdentifier; } }
+    public string IDString { get { return m_tileIdentifier.Value; } }
     public Sprite Image { get { return m_image; } }
     public GameObject TilePrefab { get { return m_tilePrefab.Value; } }
 
